@@ -23,7 +23,7 @@ These exceptions reflect the user's approved design and take precedence over con
 - Preserve the approved palette and typography; do not randomly deal replacements.
 - Do not classify Mai as a company, fabricate a commercial offer, or add marketing sections to satisfy the skill's business categories.
 - Do not add Work, Journal, Places, Style, a resume timeline, testimonials, or conversion CTAs unless the user later requests them.
-- Use Astro as requested, rather than the skill's default HTML starter. The existing `mai/dist/` files are an earlier draft, not an Astro foundation or approved production design.
+- Use Astro as requested, rather than the skill's default HTML starter. Scaffold the future application at the repository root; use `design-reference/approved-prototype.html` as a design reference, not production source.
 - Use project-appropriate browser checks. If an upstream checker flags an explicit exception, report or document it rather than changing the approved design to satisfy the checker. Never conceal genuine failures.
 - Claude-specific hooks bundled with Taste are not assumed to execute in Codex. Run applicable validation explicitly and report what actually ran.
 

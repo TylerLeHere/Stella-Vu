@@ -24,7 +24,7 @@ Read `AGENTS.md` and `DESIGN.md`, then open `design-reference/approved-prototype
 - `.nvmrc`: recommended Node 24 major version for development.
 - `THIRD_PARTY_NOTICES.md`: installed skill's license and asset provenance notes.
 
-The Astro application has not been scaffolded. There is no root `package.json`, app dependency installation, or production build yet. The untracked `mai/` directory is an earlier static draft, not the selected implementation. Preserve it until explicitly choosing how to archive it; do not build on it or deploy its old hosting configuration.
+The Astro application has not been scaffolded. There is no root `package.json`, app dependency installation, or production build yet. Scaffold the future application at the repository root. The earlier static draft has been removed; the approved design reference remains in `design-reference/`.
 
 ## Recommended stack
 
