@@ -2,7 +2,7 @@
 
 ## Current stage
 
-We are planning the design and architecture. Editing project instructions, design specifications, and installing the requested design skill is authorized. Do not start the Astro implementation, install application dependencies, or publish a website until the user asks to begin building.
+Implementation has begun. The local Astro foundation and its required dependencies are authorized. This step includes static output, strict TypeScript, npm with one committed lockfile, formatting, shared design tokens, and a minimal page and layout. Homepage design and photo interactions await the next step. Do not publish or configure hosting without a later user instruction.
 
 ## Project instructions
 
@@ -29,7 +29,7 @@ These exceptions reflect the user's approved design and take precedence over con
 
 ## Architecture direction
 
-The proposed stack is Astro static output, strict TypeScript, scoped CSS with shared tokens, Astro image processing, a small native interaction module, and PhotoSwipe for expanded photos. Confirm unresolved hosting and content-editing decisions before implementation. These are planning decisions, not installed dependencies.
+The foundation uses Astro static output, strict TypeScript, scoped CSS with shared tokens, and npm with one committed `package-lock.json`. Version one content lives in local files maintained through Git; no CMS, database, authentication, or backend is included. Astro image processing, a small native interaction module, and PhotoSwipe remain planned for later steps; install additional dependencies only when needed. Hosting is deferred and must be confirmed before publication.
 
 Keep profile data, photo metadata, composition, and motion behavior separate. Add frameworks, services, and libraries only when they solve a concrete requirement.
 

@@ -1,0 +1,18 @@
+:root {
+  --color-canvas: #f1e9e5;
+  --color-photo-paper: #fcfaf7;
+  --color-ink: #39463e;
+  --color-accent: #93616d;
+  --color-sage: #dde3d9;
+  --color-sea: #cbd8df;
+
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+}

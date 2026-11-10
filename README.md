@@ -25,49 +25,49 @@ Read `AGENTS.md` and `DESIGN.md`, then open `design-reference/approved-prototype
 - `THIRD_PARTY_NOTICES.md`: installed skill's license and asset provenance notes.
 - `src/assets/photos/`: seven user-supplied original JPEG photographs, with descriptive filenames and a `manifest.json` index.
 
-The Astro application has not been scaffolded. There is no root `package.json`, app dependency installation, or production build yet. Scaffold the future application at the repository root. The earlier static draft has been removed; the approved design reference remains in `design-reference/`.
+The Astro foundation is implemented at the repository root with static output, strict TypeScript, shared CSS tokens, and Prettier with Astro support. The index page contains only Mai’s name. Homepage composition, fonts, image processing, and photo interactions are future steps. The approved design reference remains in `design-reference/`; `DESIGN.md` records the visual specification written before scaffolding.
 
 ## Supplied photographs
 
 All seven attachments are saved under `src/assets/photos/`. The copies preserve the original file contents, resolution, and metadata; they have not been cropped, retouched, or recompressed. These durable project copies do not depend on the temporary Photos attachment paths.
 
-| Project filename | Original filename | Visible subject |
-| --- | --- | --- |
-| `mai-cafe-cake.jpeg` | `IMG_1442.jpeg` | Café portrait beside a cake |
-| `mai-garden-portrait.jpeg` | `IMG_1815.jpeg` | White blouse and green foliage |
-| `mai-pink-pajamas.jpeg` | `IMG_1886.jpeg` | Pink striped pajamas |
-| `mai-graduation.jpeg` | `IMG_1885.jpeg` | Graduation cap, gown, and flowers |
-| `mai-sunglasses.jpeg` | `IMG_1948.jpeg` | Sunglasses and patterned cover-up |
-| `mai-seaside-camera.jpeg` | `att.onzMZkvtRQhuwCpG2TJE56FfYa4wDfcmo_xhik0ga7E.jpeg` | Sunhat and camera at a rocky shore |
-| `mai-blue-outfit.jpeg` | `att.DttTtUrfEzaPoZPHu8wY4vSRrRmsOqd8iIGmebQkJ1A.jpeg` | Light blue outfit beneath a tree |
+| Project filename           | Original filename                                      | Visible subject                    |
+| -------------------------- | ------------------------------------------------------ | ---------------------------------- |
+| `mai-cafe-cake.jpeg`       | `IMG_1442.jpeg`                                        | Café portrait beside a cake        |
+| `mai-garden-portrait.jpeg` | `IMG_1815.jpeg`                                        | White blouse and green foliage     |
+| `mai-pink-pajamas.jpeg`    | `IMG_1886.jpeg`                                        | Pink striped pajamas               |
+| `mai-graduation.jpeg`      | `IMG_1885.jpeg`                                        | Graduation cap, gown, and flowers  |
+| `mai-sunglasses.jpeg`      | `IMG_1948.jpeg`                                        | Sunglasses and patterned cover-up  |
+| `mai-seaside-camera.jpeg`  | `att.onzMZkvtRQhuwCpG2TJE56FfYa4wDfcmo_xhik0ga7E.jpeg` | Sunhat and camera at a rocky shore |
+| `mai-blue-outfit.jpeg`     | `att.DttTtUrfEzaPoZPHu8wY4vSRrRmsOqd8iIGmebQkJ1A.jpeg` | Light blue outfit beneath a tree   |
 
 `manifest.json` records the filenames, image dimensions, orientation metadata, file sizes, SHA-256 checksums, and descriptive alt text. Captions are intentionally unset until supplied. Dimensions are stored-image dimensions; preserve orientation correctly when processing images. Use these originals as Astro image inputs when implementation begins. The reference prototype still uses generated stand-ins and has not been changed to use these photos yet.
 
-## Recommended stack
+## Stack and planned additions
 
-These are the recommended implementation decisions. Dependencies are not installed yet, and hosting/account choices require confirmation before publication.
+Installed foundation dependencies: Astro, `@astrojs/check`, TypeScript, Prettier, and `prettier-plugin-astro`. Exact resolved versions are recorded in the single root `package-lock.json`. Gallery, icon, font, and browser-test tooling below are future additions, installed only when needed. Hosting is deferred; no provider is configured.
 
-| Concern | Recommendation | Reason |
-| --- | --- | --- |
-| Framework | Stable Astro, static output | Simple fast page with targeted browser interactions |
-| Language | TypeScript, strict configuration | Typed photo data and maintainable interactions |
-| Runtime | Latest Node 24 LTS patch | Supported even-numbered runtime; `.nvmrc` selects this major |
-| Package manager | npm and committed `package-lock.json` | One familiar dependency workflow |
-| Styling | Scoped CSS and shared custom properties | Precise control of the approved composition |
-| Tilt | Small TypeScript module plus CSS transforms | Direct pointer response without a framework runtime |
-| Gallery | PhotoSwipe, loaded on demand | Mature expanded-photo behavior |
-| Images | Astro `Image` / `Picture`, local source assets | Responsive sizes and build-time optimization |
-| Fonts | Locally hosted licensed font files | Predictable loading and consistent typography |
-| Content | Typed local profile/photo files | Easy edits without adding an admin application |
-| Icons | Lucide, only required icons | Consistent familiar controls |
-| Validation | Astro check, production build, Playwright | Verify types, output, and actual interactions |
-| Formatting | Prettier plus Astro plugin | Consistent formatting from editor and CLI |
-| Source control | Git, private GitHub repository when configured | Small commits and recoverable history |
-| Hosting | Cloudflare Workers static assets | Serve Astro's static output; account and domain still to confirm |
+| Concern         | Recommendation                                 | Reason                                                           |
+| --------------- | ---------------------------------------------- | ---------------------------------------------------------------- |
+| Framework       | Stable Astro, static output                    | Simple fast page with targeted browser interactions              |
+| Language        | TypeScript, strict configuration               | Typed photo data and maintainable interactions                   |
+| Runtime         | Latest Node 24 LTS patch                       | Supported even-numbered runtime; `.nvmrc` selects this major     |
+| Package manager | npm and committed `package-lock.json`          | One familiar dependency workflow                                 |
+| Styling         | Scoped CSS and shared custom properties        | Precise control of the approved composition                      |
+| Tilt            | Small TypeScript module plus CSS transforms    | Direct pointer response without a framework runtime              |
+| Gallery         | PhotoSwipe, loaded on demand                   | Mature expanded-photo behavior                                   |
+| Images          | Astro `Image` / `Picture`, local source assets | Responsive sizes and build-time optimization                     |
+| Fonts           | Locally hosted licensed font files             | Predictable loading and consistent typography                    |
+| Content         | Typed local profile/photo files                | Easy edits without adding an admin application                   |
+| Icons           | Lucide, only required icons                    | Consistent familiar controls                                     |
+| Validation      | Astro check, production build, Playwright      | Verify types, output, and actual interactions                    |
+| Formatting      | Prettier plus Astro plugin                     | Consistent formatting from editor and CLI                        |
+| Source control  | Git, private GitHub repository when configured | Small commits and recoverable history                            |
+| Hosting         | Cloudflare Workers static assets               | Serve Astro's static output; account and domain still to confirm |
 
 Use the stable package versions selected at scaffold time and keep the lockfile. Treat the template as scaffolding, not the site's visual design.
 
-The first version uses local content files maintained through Git. If Mai needs to upload and edit without touching files, decide that before implementation; a CMS would change the authoring and image workflow. It is not included in this baseline.
+The first version uses local content files maintained through Git. A CMS, database, authentication, and backend are outside this baseline.
 
 ## Design tools and their roles
 
@@ -91,9 +91,9 @@ Pointer interaction tilts and lifts the selected photo with a soft moving reflec
 
 A login system, database, CMS, dashboard, contact-form service, work portfolio, and journal are outside this first version. Revisit them only for an actual need.
 
-## Proposed application structure
+## Application structure
 
-Scaffold at the repository root when implementation is authorized. Only `src/assets/photos/` exists so far; the remaining application structure below is proposed.
+The current foundation contains `src/pages/index.astro`, `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, and the original `src/assets/photos/`. The remaining structure below is proposed for subsequent steps.
 
 ```text
 src/
@@ -128,36 +128,42 @@ Profile data contains the approved name, introduction, About text, and real cont
 ## Build sequence
 
 1. **Gather content:** seven original photos are ready in `src/assets/photos/`. Choose the opening three and supply captions, a short introduction, 1 About paragraph, and verified links. Confirm whether the site will be public.
-2. **Environment:** select Node 24 LTS, open VS Code, enable the recommended extensions, and confirm who maintains the content and which hosting account to use.
-3. **Scaffold:** create the Astro application at the root, use strict TypeScript, set up formatting and ignore generated output, and commit the dependency lockfile. Preserve the existing design files and installed skill.
+2. **Environment (complete):** Node 24 is selected by `.nvmrc`; content is maintained in local files through Git. Hosting remains deferred.
+3. **Scaffold (complete):** root Astro application, strict TypeScript, formatting, generated-output ignores, shared tokens, minimal page/layout, and committed dependency lockfile. Existing design files, original photos, installed skill, and Git history are preserved.
 4. **Static design:** implement the composition, typography, images, and mobile flow with no motion first. Match the selected reference.
 5. **Interactions:** implement reusable tilt with stable hit areas and idle cleanup; integrate the production photo viewer and reduced-motion behavior.
 6. **Finish:** add real content, favicon, page metadata, and a social sharing image. Review copy and visual balance.
 7. **Validate:** build and check types; test keyboard, touch, reduced motion, long captions, image loading, and layouts at 320/390/768/1024/1440px. Inspect Safari and a real phone when available.
 8. **Publish:** after explicit publication instruction, configure the chosen provider and domain, inspect the deployed version, and verify links and metadata.
 
-Target repository scripts after scaffolding:
+## Local development
 
-```text
-npm run dev        # local development
-npm run check      # Astro and TypeScript diagnostics
-npm run build      # production output
-npm run preview    # inspect production output locally
-npm run test:e2e   # focused browser interaction tests
-npm run format:check
+Use Node 24 and npm from the repository root. With nvm installed:
+
+```sh
+nvm install 24 # first time only, if Node 24 is missing
+nvm use
+npm ci
+npm run dev
 ```
 
-These scripts do not work yet; no `package.json` has been created.
+Node 24 was installed alongside the existing Node 25 installation; the default nvm alias was preserved. Run `nvm use` in each development shell. The package engine range requires Node 24.
 
-## First Codex prompt in VS Code
+| Command                | Purpose                                                              |
+| ---------------------- | -------------------------------------------------------------------- |
+| `npm run dev`          | Start the local development server (default `http://localhost:4321`) |
+| `npm run check`        | Generate Astro types and run Astro/TypeScript diagnostics            |
+| `npm run build`        | Generate the static site in `dist/`                                  |
+| `npm run preview`      | Preview `dist/` locally after building                               |
+| `npm run format:check` | Check formatting of maintained project files                         |
 
-```text
-Read AGENTS.md, DESIGN.md, and README.md. Inspect
-design-reference/approved-prototype.html and use the installed Taste skill
-with the explicit project exceptions. Keep the personal photo-tilt design.
-First verify the Node version and propose the exact scaffold plan. Do not
-start implementation or deploy until I approve starting the build.
-```
+Use `npx prettier --write <file>` to format an edited file. Formatting excludes the installed Taste skill, approved prototype, original photo metadata, existing VS Code workspace, and preserved design/provenance documents. Type checking covers application source and Astro configuration, excluding the reference and skill. Generated output and dependencies are ignored by Git.
+
+In a restricted shell that cannot write Astro’s user preferences directory, set `ASTRO_TELEMETRY_DISABLED=1` before running Astro commands. Foundation checks were run with this environment variable.
+
+The check, build, and formatting commands are the foundation checks. Browser layout, keyboard, touch, reduced-motion, and Safari verification belong to the design and interaction steps. Taste’s visual finish gate is deferred until there is an implemented design to review. No `test:e2e` script or browser-test dependency is installed yet.
+
+No hosting, deployment, CMS, database, authentication, or backend is configured.
 
 ## References
 

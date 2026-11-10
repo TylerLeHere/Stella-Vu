@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.taste-skill/
+.agents/
+design-reference/
+src/assets/photos/
+package-lock.json
+DESIGN.md
+THIRD_PARTY_NOTICES.md
+Stella-Vu.code-workspace
