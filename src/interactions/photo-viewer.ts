@@ -20,6 +20,12 @@ function loadViewerStyles(): Promise<void> {
   return viewerStyles;
 }
 
+const openingKeys: Record<string, 'close' | 'next' | 'prev'> = {
+  Escape: 'close',
+  ArrowRight: 'next',
+  ArrowLeft: 'prev',
+};
+
 export function initPhotoViewer(): () => void {
   const data = document.querySelector('#photo-viewer-data');
   if (!data?.textContent) return () => {};
@@ -89,6 +95,27 @@ export function initPhotoViewer(): () => void {
         bgClickAction: false,
       });
       viewer = pswp;
+      // PhotoSwipe drops or mishandles input during its opening animation, and
+      // binds keys only after it, so the latest request waits until it ends.
+      let afterOpening: (() => void) | null = null;
+      for (const action of ['close', 'next', 'prev'] as const) {
+        const run = pswp[action].bind(pswp);
+        pswp[action] = () => {
+          if (pswp.opener.isOpening) afterOpening = run;
+          else run();
+        };
+      }
+      const keysWhileOpening = new AbortController();
+      document.addEventListener(
+        'keydown',
+        (event) => {
+          const action = openingKeys[event.key];
+          if (!action || !pswp.opener.isOpening) return;
+          event.preventDefault();
+          pswp[action]();
+        },
+        { signal: keysWhileOpening.signal },
+      );
       // PhotoSwipe guards focusin; explicitly cycle Tab as well so focus never
       // escapes to browser chrome when a control is first or last in the dialog.
       pswp.on('keydown', (event) => {
@@ -179,11 +206,15 @@ export function initPhotoViewer(): () => void {
         };
       });
       pswp.on('openingAnimationEnd', () => {
+        keysWhileOpening.abort();
+        // Runs after PhotoSwipe finishes its own end-of-opening work.
+        if (afterOpening) queueMicrotask(afterOpening);
         pswp.element
           ?.querySelector<HTMLButtonElement>('.pswp__button--close')
           ?.focus({ preventScroll: true });
       });
       pswp.on('destroy', () => {
+        keysWhileOpening.abort();
         restorePage?.();
         restorePage = null;
         viewer = null;
