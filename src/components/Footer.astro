@@ -36,15 +36,28 @@ const { name, links } = Astro.props;
     flex-wrap: wrap;
     gap: var(--space-16);
   }
+  .footer-content > span,
+  nav {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
   a {
     display: inline-flex;
     align-items: center;
     gap: var(--space-4);
     min-height: 44px;
+    min-width: 44px;
+    max-width: 100%;
     text-decoration: none;
   }
-  a:hover {
+  a:hover,
+  a:active {
     text-decoration: underline;
     text-decoration-color: var(--color-accent);
+  }
+  a:active {
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-ink);
   }
 </style>

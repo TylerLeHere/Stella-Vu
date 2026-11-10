@@ -139,7 +139,7 @@ await withBrowser(url, async ({ command, evaluate, errors, pause }) => {
   });
   assert(
     await evaluate(
-      `document.activeElement === document.querySelectorAll('[data-tilt-photo]')[1] && getComputedStyle(document.activeElement).outlineStyle !== 'none'`,
+      `document.activeElement === document.querySelectorAll('[data-tilt-photo]')[1] && getComputedStyle(document.activeElement.querySelector('.photo-frame')).outlineStyle !== 'none'`,
     ),
     'Keyboard order and visible focus',
   );

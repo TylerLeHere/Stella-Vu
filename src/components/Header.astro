@@ -30,12 +30,15 @@ const { name, links } = Astro.props;
     padding-block: var(--space-24);
   }
   .wordmark {
+    flex-shrink: 0;
+    white-space: nowrap;
     font-family: var(--font-heading);
     font-size: 32px;
     line-height: 1;
     text-decoration: none;
   }
   nav {
+    min-width: 0;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -48,13 +51,21 @@ const { name, links } = Astro.props;
     align-items: center;
     gap: var(--space-4);
     min-height: 44px;
+    min-width: 44px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
   nav a {
     text-decoration: none;
   }
-  nav a:hover {
+  nav a:hover,
+  nav a:active {
     text-decoration: underline;
     text-decoration-color: var(--color-accent);
+  }
+  nav a:active {
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-ink);
   }
   @media (max-width: 599px) {
     nav {

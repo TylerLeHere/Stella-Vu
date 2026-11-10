@@ -29,6 +29,16 @@ const { photo, priority = false } = Astro.props;
   .tilt-photo:focus-visible {
     z-index: 2;
   }
+  .tilt-photo:focus-visible {
+    outline: none;
+  }
+  .tilt-photo:focus-visible > :global(.photo-frame) {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 6px;
+  }
+  .tilt-photo:active > :global(.photo-frame) {
+    filter: brightness(0.97);
+  }
 </style>
 
 <script>

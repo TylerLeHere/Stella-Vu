@@ -22,3 +22,17 @@ The browser pane connection was unavailable. Rendering review used the installed
 The commercial-page finish gate, randomized visual deals, hero entrances, and dealt motion moments are not applied: the user requested the approved personal composition and a static review before motion. No gallery overlay, pointer tilt, tracking reflection, entrance animation, or hosting is included.
 
 Only Latin normal weight 400 for DM Serif Display and DM Sans is loaded, under their included SIL OFL licenses. There are no supplied captions, so no caption font is loaded. Add a licensed local Caveat file when captions are supplied and appropriate language subsets if future copy needs them.
+
+## Homepage detail refinement
+
+After tilt and PhotoSwipe were integrated, the actual production homepage was reviewed against the prototype at 320, 390, 768, 1024, and 1440px. The photographic framing, resting rotations, shadows, type sizes, and palette were retained. The observed issues and small changes were:
+
+- Desktop/tablet spacing separated the introduction, photos, About, and footer more than the reference. Three 16px spacing reductions reconnect those sections. Mobile photo spacing is retained.
+- Long unbroken footer text overflowed at 320–1024px. Footer text now wraps, and navigation can shrink and wrap without splitting the wordmark.
+- The About hit area was approximately 40px wide. Navigation links now have a 44px minimum in both dimensions.
+- The upright photo focus outline crossed the rotated photograph’s edges. The visible outline now follows the entire rotated frame, including any caption, while the link and pointer measurement area remain stable.
+- Links and photos lacked distinct pressed feedback. Links gain a thicker underline on press; the complete photo frame darkens slightly while pressed. No animation system or transform behavior was added.
+
+Before/after screenshots and synthetic long-text/caption cases were reviewed. Final measurements found no horizontal overflow at all five widths, including the stress cases. All homepage controls met the 44px minimum without overlapping hit areas. All three photo focus outlines stayed within the viewport with no clipping ancestors. The 720px CSS viewport used to simulate 1440px at 200% reflow had no overflow; emulated pinch zoom reached a visual viewport scale of 2. Actual browser-toolbar zoom was not manually tested.
+
+Astro type checking, production build, formatting, and both tilt/viewer browser regression suites passed. The tilt focus assertion was updated to inspect the outline on the frame. Original photographs, content, interactions, and dependencies were preserved. This review used isolated headless Chrome; Safari, a physical phone, and assistive technology remain unverified. QA screenshots and measurement scripts remain ignored under `.taste-skill/`.
