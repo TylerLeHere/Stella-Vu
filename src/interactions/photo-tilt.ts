@@ -27,7 +27,10 @@ export function initPhotoTilt(root: ParentNode = document): () => void {
   let frame = 0;
   let disposed = false;
 
-  const enabled = () => finePointer.matches && !reducedMotion.matches;
+  const enabled = () =>
+    finePointer.matches &&
+    !reducedMotion.matches &&
+    !document.documentElement.hasAttribute('data-photo-viewer-open');
   const clear = (element: HTMLElement) => {
     element.removeAttribute('data-tilting');
     for (const property of properties) element.style.removeProperty(property);
@@ -141,6 +144,7 @@ export function initPhotoTilt(root: ParentNode = document): () => void {
   window.addEventListener('resize', invalidate, options);
   window.addEventListener('scroll', invalidate, { ...options, capture: true });
   window.addEventListener('blur', release, options);
+  document.addEventListener('photo-viewer:open', release, options);
   document.addEventListener(
     'visibilitychange',
     () => {

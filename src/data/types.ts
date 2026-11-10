@@ -34,3 +34,14 @@ export interface Photo {
   /** Degrees; separate from the source image’s EXIF orientation. */
   restingRotation: number;
 }
+
+/** Serializable build-time image data for the on-demand viewer. */
+export interface ViewerPhoto {
+  id: string;
+  src: string;
+  srcset: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption: string | null;
+}

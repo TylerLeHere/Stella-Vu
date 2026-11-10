@@ -2,7 +2,7 @@
 
 ## Current stage
 
-The Astro foundation, personal content layer, homepage, and reusable photo tilt are implemented. Fine hover-capable pointers get subtle tilt, lift, reflection, and directional depth; touch and reduced motion retain native full-size image links without spatial effects. The layout is preserved. Entrance animations and the gallery overlay await a later step. Do not publish or configure hosting without a later user instruction.
+The Astro foundation, personal content layer, homepage, reusable photo tilt, and PhotoSwipe viewer are implemented. Fine hover-capable pointers get subtle tilt, lift, reflection, and directional depth. All seven photos are available in the on-demand viewer, with touch and keyboard navigation, reduced motion, focus restoration, and native image-link fallback. The homepage layout is preserved. Entrance animations await a later step. Do not publish or configure hosting without a later user instruction.
 
 ## Project instructions
 
@@ -29,7 +29,7 @@ These exceptions reflect the user's approved design and take precedence over con
 
 ## Architecture direction
 
-The foundation uses Astro static output, strict TypeScript, scoped CSS with shared tokens, and npm with one committed `package-lock.json`. Version one content lives in local files maintained through Git; no CMS, database, authentication, or backend is included. Astro image processing and the native photo-tilt module are implemented. PhotoSwipe remains planned for a later step; install additional dependencies only when needed. Hosting is deferred and must be confirmed before publication.
+The foundation uses Astro static output, strict TypeScript, scoped CSS with shared tokens, and npm with one committed `package-lock.json`. Version one content lives in local files maintained through Git; no CMS, database, authentication, or backend is included. Astro image processing and the native photo-tilt module are implemented. PhotoSwipe is loaded on demand for expanded photos; install additional dependencies only when needed. Hosting is deferred and must be confirmed before publication.
 
 Keep profile data, photo metadata, composition, and motion behavior separate. Add frameworks, services, and libraries only when they solve a concrete requirement.
 

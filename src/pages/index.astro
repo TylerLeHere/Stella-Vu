@@ -7,6 +7,7 @@ import About from '../components/About.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../data/profile';
 import { openingPhotos } from '../data/photos';
+import PhotoViewer from '../components/PhotoViewer.astro';
 ---
 
 <BaseLayout title={profile.name} description={profile.introduction}>
@@ -19,4 +20,5 @@ import { openingPhotos } from '../data/photos';
     <About text={profile.about} />
   </main>
   <Footer name={profile.name} links={profile.links} />
+  <PhotoViewer />
 </BaseLayout>

@@ -1,0 +1,61 @@
+---
+import { getImage } from 'astro:assets';
+import { galleryPhotos } from '../data/photos';
+import type { ViewerPhoto } from '../data/types';
+
+const photos: ViewerPhoto[] = await Promise.all(
+  galleryPhotos.map(async (photo) => {
+    const widths = [
+      ...new Set(
+        [640, 1280, photo.image.width].filter(
+          (width) => width <= photo.image.width,
+        ),
+      ),
+    ];
+    const images = await Promise.all(
+      widths.map((width) =>
+        getImage({ src: photo.image, width, format: 'webp', quality: 85 }),
+      ),
+    );
+    return {
+      id: photo.id,
+      src: photo.image.src,
+      srcset: images
+        .map((image, index) => `${image.src} ${widths[index]}w`)
+        .join(', '),
+      width: photo.image.width,
+      height: photo.image.height,
+      alt: photo.alt,
+      caption: photo.caption,
+    };
+  }),
+);
+const json = JSON.stringify(photos).replace(/</g, '\\u003c');
+---
+
+<script id="photo-viewer-data" type="application/json" set:html={json} />
+<script>
+  import { initPhotoViewer } from '../interactions/photo-viewer';
+  let dispose = initPhotoViewer();
+  const mount = () => {
+    dispose();
+    dispose = initPhotoViewer();
+  };
+  const unmount = () => dispose();
+  const restore = (event: PageTransitionEvent) => {
+    if (event.persisted) mount();
+  };
+  document.addEventListener('astro:before-swap', unmount);
+  document.addEventListener('astro:page-load', mount);
+  window.addEventListener('pagehide', unmount);
+  window.addEventListener('pageshow', restore);
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      unmount();
+      document.removeEventListener('astro:before-swap', unmount);
+      document.removeEventListener('astro:page-load', mount);
+      window.removeEventListener('pagehide', unmount);
+      window.removeEventListener('pageshow', restore);
+    });
+  }
+</script>
