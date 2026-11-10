@@ -1,13 +1,19 @@
 ---
 import '../styles/tokens.css';
 import '../styles/global.css';
+import type { Profile } from '../data/types';
 
 interface Props {
   title: string;
   description: string;
+  socialImage: Profile['metadata']['socialImage'];
 }
 
-const { title, description } = Astro.props;
+const { title, description, socialImage } = Astro.props;
+// Astro.site comes from SITE_URL. Relative social URLs are not usable by crawlers.
+const absolute = (path: string) => Astro.site && new URL(path, Astro.site).href;
+const canonical = absolute(Astro.url.pathname);
+const socialImageUrl = absolute(socialImage.path);
 ---
 
 <!doctype html>
@@ -32,6 +38,25 @@ const { title, description } = Astro.props;
       crossorigin
     />
     <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {socialImageUrl && (
+      <>
+        <meta property="og:image" content={socialImageUrl} />
+        <meta property="og:image:width" content={String(socialImage.width)} />
+        <meta property="og:image:height" content={String(socialImage.height)} />
+        <meta property="og:image:alt" content={socialImage.alt} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={socialImageUrl} />
+        <meta name="twitter:image:alt" content={socialImage.alt} />
+      </>
+    )}
   </head>
   <body>
     <a class="skip-link" href="#main">

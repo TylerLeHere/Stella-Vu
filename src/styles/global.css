@@ -14,6 +14,25 @@
   font-display: swap;
 }
 
+/* Local fallbacks tuned to the DM metrics so the font swap barely moves text. */
+@font-face {
+  font-family: 'DM Serif Display Fallback';
+  src: local('Georgia');
+  size-adjust: 97.57%;
+  ascent-override: 106.2%;
+  descent-override: 34.3%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'DM Sans Fallback';
+  src: local('Arial');
+  size-adjust: 102.94%;
+  ascent-override: 96.4%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+
 * {
   box-sizing: border-box;
 }

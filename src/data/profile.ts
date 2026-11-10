@@ -11,4 +11,15 @@ export const profile = {
       href: 'https://www.linkedin.com/in/quynhmaivux/',
     },
   ],
+  metadata: {
+    title: 'Quynh Mai Vu',
+    description:
+      'The personal website of Quynh Mai Vu, with photographs and a little about her interests in fashion, travel, and photography.',
+    socialImage: {
+      path: '/social-card.jpg',
+      alt: 'The name Quynh Mai Vu beside a photograph of Mai in a white blouse with green foliage behind her.',
+      width: 1200,
+      height: 630,
+    },
+  },
 } satisfies Profile;

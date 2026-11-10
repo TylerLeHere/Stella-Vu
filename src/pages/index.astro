@@ -10,7 +10,7 @@ import { openingPhotos } from '../data/photos';
 import PhotoViewer from '../components/PhotoViewer.astro';
 ---
 
-<BaseLayout title={profile.name} description={profile.introduction}>
+<BaseLayout {...profile.metadata}>
   <div id="home">
     <Header name={profile.name} links={profile.links} />
   </div>

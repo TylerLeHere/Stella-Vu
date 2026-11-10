@@ -10,6 +10,17 @@ export interface Profile {
   introduction: string;
   about: string;
   links: readonly ProfileLink[];
+  metadata: {
+    title: string;
+    description: string;
+    socialImage: {
+      /** Root-relative path to a file in public/. */
+      path: `/${string}`;
+      alt: string;
+      width: number;
+      height: number;
+    };
+  };
 }
 
 export interface Photo {

@@ -1,5 +1,24 @@
 import type PhotoSwipe from 'photoswipe';
 import type { ViewerPhoto } from '../data/types';
+import viewerStylesUrl from '../styles/photo-viewer.css?url';
+
+// A linked URL keeps Astro from adding these styles to the initial page.
+let viewerStyles: Promise<void> | null = null;
+function loadViewerStyles(): Promise<void> {
+  viewerStyles ??= new Promise<void>((resolve, reject) => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = viewerStylesUrl;
+    link.onload = () => resolve();
+    link.onerror = () => {
+      link.remove();
+      viewerStyles = null;
+      reject(new Error('Photo viewer styles failed to load'));
+    };
+    document.head.append(link);
+  });
+  return viewerStyles;
+}
 
 export function initPhotoViewer(): () => void {
   const data = document.querySelector('#photo-viewer-data');
@@ -37,7 +56,7 @@ export function initPhotoViewer(): () => void {
       // Neither the viewer core nor its styles are requested before the first open.
       const [{ default: PhotoSwipeCore }] = await Promise.all([
         import('photoswipe'),
-        import('../styles/photo-viewer.css'),
+        loadViewerStyles(),
       ]);
       if (disposed || !opener.isConnected) return;
       const pswp = new PhotoSwipeCore({

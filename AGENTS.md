@@ -2,7 +2,7 @@
 
 ## Current stage
 
-The Astro foundation, personal content layer, homepage, reusable photo tilt, and PhotoSwipe viewer are implemented. Fine hover-capable pointers get subtle tilt, lift, reflection, and directional depth. All seven photos are available in the on-demand viewer, with touch and keyboard navigation, reduced motion, focus restoration, and native image-link fallback. The homepage layout is preserved. Entrance animations await a later step. Do not publish or configure hosting without a later user instruction.
+The Astro foundation, personal content layer, homepage, reusable photo tilt, and PhotoSwipe viewer are implemented. Fine hover-capable pointers get subtle tilt, lift, reflection, and directional depth. All seven photos are available in the on-demand viewer, with touch and keyboard navigation, reduced motion, focus restoration, and native image-link fallback. Page metadata, favicon, a social sharing image, and metric-matched font fallbacks are prepared; the final domain is pending and is supplied through `SITE_URL` at build time. The homepage layout is preserved. Entrance animations await a later step. Do not publish or configure hosting without a later user instruction.
 
 ## Project instructions
 
