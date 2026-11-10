@@ -109,7 +109,7 @@ A login system, database, CMS, dashboard, contact-form service, work portfolio, 
 
 ## Application structure
 
-The current foundation contains `src/pages/index.astro`, `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, the content files in `src/data/`, and the original `src/assets/photos/`. Major section components and `src/styles/global.css` are also implemented. Photo interactions, the viewer, favicon, and sharing metadata are implemented; Playwright test files below remain proposed for subsequent steps.
+The current foundation contains `src/pages/index.astro`, `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, the content files in `src/data/`, and the original `src/assets/photos/`. Major section components and `src/styles/global.css` are also implemented. Photo interactions, the viewer, favicon, sharing metadata, and Playwright browser checks are implemented.
 
 ```text
 src/
@@ -182,7 +182,7 @@ Use `npx prettier --write <file>` to format an edited file. Formatting excludes 
 
 In a restricted shell that cannot write Astro’s user preferences directory, set `ASTRO_TELEMETRY_DISABLED=1` before running Astro commands. Foundation checks were run with this environment variable.
 
-The check, build, and formatting commands validate the implementation. The static design was reviewed using Taste’s headless Chrome screenshots and responsive layout checker; results and limits are in `docs/static-review.md`. The commercial-page finish gate is not a compatible acceptance gate for this personal, content-sized page. No `test:e2e` script or browser-test dependency is installed yet.
+The check, build, and formatting commands validate the implementation. The static design was reviewed using Taste’s headless Chrome screenshots and responsive layout checker; results and limits are in `docs/static-review.md`. The commercial-page finish gate is not a compatible acceptance gate for this personal, content-sized page. `npm run test:e2e` builds the site and runs the Playwright checks against a production preview in Chromium, WebKit, and emulated phone profiles. Run `npx playwright install chromium webkit` once first. WebKit and phone profiles are emulation, not a real Safari or iPhone test.
 
 No hosting, deployment, CMS, database, authentication, or backend is configured.
 
