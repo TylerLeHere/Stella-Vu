@@ -12,25 +12,20 @@ const { photo, priority = false } = Astro.props;
   class="photo-frame"
   style={`--resting-rotation: ${photo.restingRotation}deg`}
 >
-  <a
-    class="photo-link"
-    href={photo.image.src}
-    aria-label={`Open full-size photograph: ${photo.alt}`}
-  >
-    <Image
-      src={photo.image}
-      alt={photo.alt}
-      width={960}
-      widths={[320, 480, 640, 960]}
-      sizes="(max-width: 599px) calc(min(100vw - 88px, 288px) - 16px), (max-width: 1023px) 26vw, 280px"
-      format="webp"
-      quality={85}
-      loading={priority ? 'eager' : 'lazy'}
-      fetchpriority={priority ? 'high' : 'auto'}
-      style={`object-fit: ${photo.crop.fit}; object-position: ${photo.crop.position};`}
-    />
-  </a>
+  <Image
+    src={photo.image}
+    alt={photo.alt}
+    width={960}
+    widths={[320, 480, 640, 960]}
+    sizes="(max-width: 599px) calc(min(100vw - 88px, 288px) - 16px), (max-width: 1023px) 26vw, 280px"
+    format="webp"
+    quality={85}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : 'auto'}
+    style={`object-fit: ${photo.crop.fit}; object-position: ${photo.crop.position};`}
+  />
   {photo.caption && <figcaption>{photo.caption}</figcaption>}
+  <span class="reflection" aria-hidden="true"></span>
 </figure>
 
 <style>
@@ -40,17 +35,51 @@ const { photo, priority = false } = Astro.props;
     padding: var(--space-8);
     background: var(--color-photo-paper);
     border-radius: var(--photo-radius);
-    transform: rotate(var(--resting-rotation));
+    pointer-events: none;
+    transform: perspective(900px) translateY(var(--lift, 0px))
+      rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
+      rotate(var(--resting-rotation));
+    transition: transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1);
     box-shadow:
       0 12px 24px rgb(57 70 62 / 12%),
       0 2px 4px rgb(57 70 62 / 6%);
   }
-  .photo-frame:focus-within {
-    z-index: 1;
+  :global([data-tilting]) > .photo-frame {
+    transition-duration: 140ms;
   }
-  .photo-link {
-    display: block;
-    border-radius: 1px;
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    box-shadow: 0 16px 28px rgb(57 70 62 / 12%);
+    opacity: var(--effect-opacity, 0);
+    transform: translate(var(--shadow-x, 0px), var(--shadow-y, 0px));
+    transition:
+      opacity 450ms ease,
+      transform 450ms ease;
+  }
+  .reflection {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    opacity: var(--effect-opacity, 0);
+    transition: opacity 450ms ease;
+  }
+  .reflection::after {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    background: linear-gradient(
+      115deg,
+      transparent 35%,
+      rgb(255 255 255 / 18%) 50%,
+      transparent 65%
+    );
+    transform: translate(var(--shine-x, 0%), var(--shine-y, 0%));
+    transition: transform 140ms ease-out;
   }
   img {
     display: block;
@@ -67,6 +96,16 @@ const { photo, priority = false } = Astro.props;
   @media (max-width: 599px) {
     figcaption {
       font-size: 20px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+    .photo-frame {
+      transform: rotate(var(--resting-rotation));
+      transition: none;
+    }
+    .reflection,
+    .photo-frame::before {
+      display: none;
     }
   }
 </style>

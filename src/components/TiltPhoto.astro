@@ -1,0 +1,57 @@
+---
+import PhotoFrame from './PhotoFrame.astro';
+import type { Photo } from '../data/types';
+interface Props {
+  photo: Photo;
+  priority?: boolean;
+}
+const { photo, priority = false } = Astro.props;
+---
+
+<a
+  class="tilt-photo"
+  data-tilt-photo
+  href={photo.image.src}
+  aria-label={`Open full-size photograph: ${photo.alt}`}
+>
+  <PhotoFrame photo={photo} priority={priority} />
+</a>
+
+<style>
+  .tilt-photo {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    border-radius: var(--photo-radius);
+  }
+  .tilt-photo[data-tilting],
+  .tilt-photo:focus-visible {
+    z-index: 2;
+  }
+</style>
+
+<script>
+  import { initPhotoTilt } from '../interactions/photo-tilt';
+  let dispose = initPhotoTilt();
+  const mount = () => {
+    dispose();
+    dispose = initPhotoTilt();
+  };
+  const unmount = () => dispose();
+  const restore = (event: PageTransitionEvent) => {
+    if (event.persisted) mount();
+  };
+  document.addEventListener('astro:before-swap', unmount);
+  document.addEventListener('astro:page-load', mount);
+  window.addEventListener('pagehide', unmount);
+  window.addEventListener('pageshow', restore);
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      unmount();
+      document.removeEventListener('astro:before-swap', unmount);
+      document.removeEventListener('astro:page-load', mount);
+      window.removeEventListener('pagehide', unmount);
+      window.removeEventListener('pageshow', restore);
+    });
+  }
+</script>

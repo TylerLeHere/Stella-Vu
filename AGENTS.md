@@ -2,7 +2,7 @@
 
 ## Current stage
 
-The Astro foundation, personal content layer, and static homepage are implemented. The homepage is ready for visual review, with resting photo rotations and native links to full-size images. Pointer tilt, tracking reflection, entrance animations, and the gallery overlay await a later step. Do not publish or configure hosting without a later user instruction.
+The Astro foundation, personal content layer, homepage, and reusable photo tilt are implemented. Fine hover-capable pointers get subtle tilt, lift, reflection, and directional depth; touch and reduced motion retain native full-size image links without spatial effects. The layout is preserved. Entrance animations and the gallery overlay await a later step. Do not publish or configure hosting without a later user instruction.
 
 ## Project instructions
 
@@ -29,7 +29,7 @@ These exceptions reflect the user's approved design and take precedence over con
 
 ## Architecture direction
 
-The foundation uses Astro static output, strict TypeScript, scoped CSS with shared tokens, and npm with one committed `package-lock.json`. Version one content lives in local files maintained through Git; no CMS, database, authentication, or backend is included. Astro image processing, a small native interaction module, and PhotoSwipe remain planned for later steps; install additional dependencies only when needed. Hosting is deferred and must be confirmed before publication.
+The foundation uses Astro static output, strict TypeScript, scoped CSS with shared tokens, and npm with one committed `package-lock.json`. Version one content lives in local files maintained through Git; no CMS, database, authentication, or backend is included. Astro image processing and the native photo-tilt module are implemented. PhotoSwipe remains planned for a later step; install additional dependencies only when needed. Hosting is deferred and must be confirmed before publication.
 
 Keep profile data, photo metadata, composition, and motion behavior separate. Add frameworks, services, and libraries only when they solve a concrete requirement.
 

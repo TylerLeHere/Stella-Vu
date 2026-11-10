@@ -1,5 +1,5 @@
 ---
-import PhotoFrame from './PhotoFrame.astro';
+import TiltPhoto from './TiltPhoto.astro';
 import type { Photo } from '../data/types';
 interface Props {
   photos: readonly Photo[];
@@ -11,7 +11,7 @@ const { photos } = Astro.props;
   <ul>
     {photos.map((photo, index) => (
       <li>
-        <PhotoFrame photo={photo} priority={index === 0} />
+        <TiltPhoto photo={photo} priority={index === 0} />
       </li>
     ))}
   </ul>

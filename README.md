@@ -25,7 +25,7 @@ Read `AGENTS.md` and `DESIGN.md`, then open `design-reference/approved-prototype
 - `THIRD_PARTY_NOTICES.md`: installed skill's license and asset provenance notes.
 - `src/assets/photos/`: seven user-supplied original JPEG photographs, with descriptive filenames and a `manifest.json` index.
 
-The Astro foundation is implemented at the repository root with static output, strict TypeScript, shared CSS tokens, and Prettier with Astro support. The static homepage renders the header, introduction, three-photo composition, About section, and footer using the local content layer. DM Serif Display and DM Sans are self-hosted, and Astro builds responsive WebP thumbnails. Photos have static resting rotations and native links to their full-size JPEGs. Motion and the gallery overlay remain future steps. The approved design reference remains in `design-reference/`; `DESIGN.md` records the visual specification written before scaffolding.
+The Astro foundation is implemented at the repository root with static output, strict TypeScript, shared CSS tokens, and Prettier with Astro support. The static homepage renders the header, introduction, three-photo composition, About section, and footer using the local content layer. DM Serif Display and DM Sans are self-hosted, and Astro builds responsive WebP thumbnails. Photos retain their resting rotations and native links to full-size JPEGs. Fine hover-capable pointers add gentle tilt, lift, reflection, and directional depth. Touch and reduced motion disable the spatial effects. The gallery overlay remains a future step. The approved design reference remains in `design-reference/`; `DESIGN.md` records the visual specification written before scaffolding.
 
 ## Supplied photographs
 
@@ -120,6 +120,7 @@ src/
     Introduction.astro
     PhotoComposition.astro
     PhotoFrame.astro
+    TiltPhoto.astro
     About.astro
     Footer.astro
   interactions/
@@ -147,7 +148,7 @@ Profile data contains the approved name, introduction, About text, and real cont
 2. **Environment (complete):** Node 24 is selected by `.nvmrc`; content is maintained in local files through Git. Hosting remains deferred.
 3. **Scaffold (complete):** root Astro application, strict TypeScript, formatting, generated-output ignores, shared tokens, minimal page/layout, and committed dependency lockfile. Existing design files, original photos, installed skill, and Git history are preserved.
 4. **Static design (ready for review):** reusable section components, local licensed fonts, responsive Astro images, mobile photo reflow, static rotations, visible focus, and native full-size image links. See `docs/static-review.md` for checks and Taste exceptions.
-5. **Interactions:** implement reusable tilt with stable hit areas and idle cleanup; integrate the production photo viewer and reduced-motion behavior.
+5. **Interactions (tilt ready for review):** `TiltPhoto.astro` provides stable links around `PhotoFrame.astro`; `src/interactions/photo-tilt.ts` batches pointer updates and geometry reads in requestAnimationFrame, stops when idle, and cleans up on navigation/HMR. Touch and reduced motion retain native image navigation. The production gallery viewer remains a later step.
 6. **Finish:** add real content, favicon, page metadata, and a social sharing image. Review copy and visual balance.
 7. **Validate:** build and check types; test keyboard, touch, reduced motion, long captions, image loading, and layouts at 320/390/768/1024/1440px. Inspect Safari and a real phone when available.
 8. **Publish:** after explicit publication instruction, configure the chosen provider and domain, inspect the deployed version, and verify links and metadata.
@@ -192,3 +193,15 @@ No hosting, deployment, CMS, database, authentication, or backend is configured.
 - Interface quality: https://vercel.com/design/guidelines
 - Codex instructions: https://learn.chatgpt.com/docs/agent-configuration/agents-md
 - Codex in VS Code: https://learn.chatgpt.com/docs/codex/ide
+
+## Checking photo tilt
+
+With the local server running and Node 24 selected:
+
+```sh
+node scripts/check-photo-tilt.mjs http://127.0.0.1:4321/
+```
+
+This dependency-free browser check starts its own isolated headless Chrome profile. It defaults to macOS Google Chrome; set `CHROME_PATH` to another compatible Chrome/Chromium executable when needed. To test production assets, first run `npm run build`, start `npm run preview -- --port 4322`, then pass `http://127.0.0.1:4322/` to the checker. The checker closes its own browser and writes an ignored active-tilt screenshot under `.taste-skill/shots/`.
+
+Checks cover pointer entry/movement/exit, tilt bounds, lift, reflection, fixed wrapper geometry, frame batching, idle cleanup, rapid neighbor switching, keyboard focus, live reduced-motion changes, hybrid and touch-only behavior, native tap/click navigation, lifecycle disposal, and restoration. These are emulated Chrome checks; Safari and a physical touch device remain unverified. The earlier static review in `docs/static-review.md` records the pre-motion baseline.
