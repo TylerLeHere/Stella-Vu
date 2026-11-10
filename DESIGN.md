@@ -8,10 +8,11 @@ A small personal corner of the internet for Quynh Mai Vu. Warm summer light, mut
 
 The user's preferred concept is the interactive photo-tilt prototype: a simple introduction above three slightly rotated photos, short personal captions, a little about her, and a quiet contact link. Keep one coherent visual language throughout.
 
-Reference prototype on the originating machine:
-`/Users/tylerle/.codex/visualizations/2026/11/08/01a1b87a-a8bd-7520-9da4-9dda1b35fd9c/mai-summer-depth.html`
+Portable reference prototype: `design-reference/approved-prototype.html`. Open this exported standalone page in a browser to review the approved composition and interactions. It includes the illustrative images; fonts and icon resources may require network access. It is a design reference, not a production application or a verified replacement for the final gallery.
 
-That path is local reference material, never a production asset URL. Its photos and copy are illustrative placeholders. Generated people are not Mai's likeness. The final site needs user-approved photographs and writing.
+The original editable conversation fragment remains at `/Users/tylerle/.codex/visualizations/2026/11/08/01a1b87a-a8bd-7520-9da4-9dda1b35fd9c/mai-summer-depth.html` on the originating machine.
+
+Its photos and copy are illustrative placeholders. Generated people are not Mai's likeness. The final site needs user-approved photographs and writing.
 
 ## 2. Palette and semantic roles
 

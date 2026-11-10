@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "name": "Mai — personal website",
+      "path": "."
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "astro-build.astro-vscode",
+      "openai.chatgpt"
+    ]
+  }
+}
