@@ -43,6 +43,22 @@ All seven attachments are saved under `src/assets/photos/`. The copies preserve 
 
 `manifest.json` records the filenames, image dimensions, orientation metadata, file sizes, SHA-256 checksums, and descriptive alt text. Captions are intentionally unset until supplied. Dimensions are stored-image dimensions; preserve orientation correctly when processing images. Use these originals as Astro image inputs when implementation begins. The reference prototype still uses generated stand-ins and has not been changed to use these photos yet.
 
+## Editing personal content
+
+Edit `src/data/profile.ts` for Mai’s name, draft introduction, About text, and verified links. The current copy uses only her supplied interests: fashion, travel, and photography. LinkedIn is the only supplied destination; add other links only when their real URLs are provided. The content layer is prepared for future components; this step leaves the minimal index page unchanged.
+
+Edit `src/data/photos.ts` for each photo’s descriptive `alt`, optional `caption`, provisional `crop`, and `restingRotation` (degrees). All captions are `null`; replace one with a supplied caption when available. Alt text describes the visible image and is separate from a personal caption. Shared content shapes live in `src/data/types.ts`.
+
+- `openingOrder` controls the opening selection and its left-to-right/reading order. It provisionally lists garden portrait, seaside camera, then blue outfit. Reorder or replace IDs to change the selection.
+- `galleryOrder` controls the expanded gallery order independently. Keep each of the seven photo IDs exactly once to retain the complete gallery.
+- `openingPhotos` and `galleryPhotos` resolve these lists to photo records with local Astro-compatible image imports.
+- `crop.fit: 'contain'` preserves the full frame. All seven sources are 3:4 portraits. `crop.position` uses CSS percentage coordinates, initially `50% 50%`. Any future `cover` crop needs review at its actual rendered size to keep faces and important details visible. These settings never modify the source file.
+- `restingRotation` starts at -6, +2, and +6 degrees for the opening photos; the other photos start at zero. Adjust it on the photo record if you change the composition. It is independent of EXIF orientation.
+
+Source filenames, original attachment names, and stored pixel dimensions come from the unchanged `manifest.json`. EXIF orientation was checked directly in the JPEGs: café, garden, pajamas, graduation, and sunglasses are `1` (upright); seaside and blue outfit have no orientation tag (`null`). The manifest’s original `<nil>` markers did not distinguish these cases; `source.orientation` in the content layer records the observed values. Use the imported `image` metadata with Astro image processing; retain `source` as provenance rather than overriding processed-image dimensions.
+
+Keep original JPEGs unchanged. When editing content, run `npm run check`, `npm run build`, and `npm run format:check`, review the diff, and commit the content files through Git. No extra dependencies are needed for this content layer.
+
 ## Stack and planned additions
 
 Installed foundation dependencies: Astro, `@astrojs/check`, TypeScript, Prettier, and `prettier-plugin-astro`. Exact resolved versions are recorded in the single root `package-lock.json`. Gallery, icon, font, and browser-test tooling below are future additions, installed only when needed. Hosting is deferred; no provider is configured.
@@ -93,7 +109,7 @@ A login system, database, CMS, dashboard, contact-form service, work portfolio, 
 
 ## Application structure
 
-The current foundation contains `src/pages/index.astro`, `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, and the original `src/assets/photos/`. The remaining structure below is proposed for subsequent steps.
+The current foundation contains `src/pages/index.astro`, `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, the content files in `src/data/`, and the original `src/assets/photos/`. The remaining structure below is proposed for subsequent steps.
 
 ```text
 src/
@@ -127,7 +143,7 @@ Profile data contains the approved name, introduction, About text, and real cont
 
 ## Build sequence
 
-1. **Gather content:** seven original photos are ready in `src/assets/photos/`. Choose the opening three and supply captions, a short introduction, 1 About paragraph, and verified links. Confirm whether the site will be public.
+1. **Gather content:** seven original photos are ready in `src/assets/photos/`. The provisional opening selection and draft introduction/About text live in `src/data/`; LinkedIn is supplied. Review the selection and draft copy, and supply any personal captions or additional verified links. Confirm whether the site will be public.
 2. **Environment (complete):** Node 24 is selected by `.nvmrc`; content is maintained in local files through Git. Hosting remains deferred.
 3. **Scaffold (complete):** root Astro application, strict TypeScript, formatting, generated-output ignores, shared tokens, minimal page/layout, and committed dependency lockfile. Existing design files, original photos, installed skill, and Git history are preserved.
 4. **Static design:** implement the composition, typography, images, and mobile flow with no motion first. Match the selected reference.
