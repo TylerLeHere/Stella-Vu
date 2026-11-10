@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "photos": [
+    {
+      "id": "mai-cafe-cake",
+      "file": "mai-cafe-cake.jpeg",
+      "originalFilename": "IMG_1442.jpeg",
+      "width": 1536,
+      "height": 2048,
+      "orientation": "<nil>",
+      "bytes": 315821,
+      "sha256": "957786e8ff0376ab376174c3be63f9d206868fce05de2e008c3353addc933d94",
+      "alt": "Mai smiling beside a cake at a café.",
+      "caption": null
+    },
+    {
+      "id": "mai-garden-portrait",
+      "file": "mai-garden-portrait.jpeg",
+      "originalFilename": "IMG_1815.jpeg",
+      "width": 1536,
+      "height": 2048,
+      "orientation": "<nil>",
+      "bytes": 519681,
+      "sha256": "55ca20dd416f6cc1cc17ef8dd546053667d4bb32a265ee59dda0d493c49ea7f2",
+      "alt": "Mai wearing a white blouse with green foliage behind her.",
+      "caption": null
+    },
+    {
+      "id": "mai-pink-pajamas",
+      "file": "mai-pink-pajamas.jpeg",
+      "originalFilename": "IMG_1886.jpeg",
+      "width": 3024,
+      "height": 4032,
+      "orientation": "<nil>",
+      "bytes": 761352,
+      "sha256": "856794597879a218954e7c4671b996197427226892f6676f380e70e5dae01616",
+      "alt": "Mai sitting on a bed in pink striped pajamas.",
+      "caption": null
+    },
+    {
+      "id": "mai-graduation",
+      "file": "mai-graduation.jpeg",
+      "originalFilename": "IMG_1885.jpeg",
+      "width": 1536,
+      "height": 2048,
+      "orientation": "<nil>",
+      "bytes": 684128,
+      "sha256": "1f9e856757ed804f83feb8f2b1c8e6b2ddeb4e1c383b02ea24326ac23f4a8816",
+      "alt": "Mai wearing a graduation cap and gown and holding a bouquet.",
+      "caption": null
+    },
+    {
+      "id": "mai-sunglasses",
+      "file": "mai-sunglasses.jpeg",
+      "originalFilename": "IMG_1948.jpeg",
+      "width": 1656,
+      "height": 2208,
+      "orientation": "<nil>",
+      "bytes": 573264,
+      "sha256": "6595221138acf9b06421edc29bbdeb479ba85c1a57a6388379a75be2da1342b3",
+      "alt": "Mai wearing sunglasses and a white patterned cover-up while sitting on a sofa.",
+      "caption": null
+    },
+    {
+      "id": "mai-seaside-camera",
+      "file": "mai-seaside-camera.jpeg",
+      "originalFilename": "att.onzMZkvtRQhuwCpG2TJE56FfYa4wDfcmo_xhik0ga7E.jpeg",
+      "width": 1536,
+      "height": 2048,
+      "orientation": "<nil>",
+      "bytes": 221163,
+      "sha256": "a27ccc664bed45086ec02a46d93244e7a15f61ae300df726a3fc618a4d206bb1",
+      "alt": "Mai holding a camera and wearing a sunhat beside a rocky shore.",
+      "caption": null
+    },
+    {
+      "id": "mai-blue-outfit",
+      "file": "mai-blue-outfit.jpeg",
+      "originalFilename": "att.DttTtUrfEzaPoZPHu8wY4vSRrRmsOqd8iIGmebQkJ1A.jpeg",
+      "width": 1536,
+      "height": 2048,
+      "orientation": "<nil>",
+      "bytes": 302481,
+      "sha256": "0edb53b54adf13368fa193c7bbcc18e2f491ad19ac3aa77c8881a679b4242750",
+      "alt": "Mai smiling beneath a tree in a light blue outfit, with a historic building behind her.",
+      "caption": null
+    }
+  ]
+}

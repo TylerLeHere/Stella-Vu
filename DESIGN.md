@@ -14,6 +14,8 @@ The original editable conversation fragment remains at `/Users/tylerle/.codex/vi
 
 Its photos and copy are illustrative placeholders. Generated people are not Mai's likeness. The final site needs user-approved photographs and writing.
 
+Seven user-supplied original photographs are now available in `src/assets/photos/`; see `manifest.json` for filenames, dimensions, and descriptive alt text. These are the real source assets for the future site. Captions and the opening selection are not finalized. The reference prototype retains its illustrative photos until explicitly updated.
+
 ## 2. Palette and semantic roles
 
 | Token | Value | Role |

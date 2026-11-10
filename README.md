@@ -23,8 +23,25 @@ Read `AGENTS.md` and `DESIGN.md`, then open `design-reference/approved-prototype
 - `Stella-Vu.code-workspace`: VS Code entry point and extension recommendations.
 - `.nvmrc`: recommended Node 24 major version for development.
 - `THIRD_PARTY_NOTICES.md`: installed skill's license and asset provenance notes.
+- `src/assets/photos/`: seven user-supplied original JPEG photographs, with descriptive filenames and a `manifest.json` index.
 
 The Astro application has not been scaffolded. There is no root `package.json`, app dependency installation, or production build yet. Scaffold the future application at the repository root. The earlier static draft has been removed; the approved design reference remains in `design-reference/`.
+
+## Supplied photographs
+
+All seven attachments are saved under `src/assets/photos/`. The copies preserve the original file contents, resolution, and metadata; they have not been cropped, retouched, or recompressed. These durable project copies do not depend on the temporary Photos attachment paths.
+
+| Project filename | Original filename | Visible subject |
+| --- | --- | --- |
+| `mai-cafe-cake.jpeg` | `IMG_1442.jpeg` | Café portrait beside a cake |
+| `mai-garden-portrait.jpeg` | `IMG_1815.jpeg` | White blouse and green foliage |
+| `mai-pink-pajamas.jpeg` | `IMG_1886.jpeg` | Pink striped pajamas |
+| `mai-graduation.jpeg` | `IMG_1885.jpeg` | Graduation cap, gown, and flowers |
+| `mai-sunglasses.jpeg` | `IMG_1948.jpeg` | Sunglasses and patterned cover-up |
+| `mai-seaside-camera.jpeg` | `att.onzMZkvtRQhuwCpG2TJE56FfYa4wDfcmo_xhik0ga7E.jpeg` | Sunhat and camera at a rocky shore |
+| `mai-blue-outfit.jpeg` | `att.DttTtUrfEzaPoZPHu8wY4vSRrRmsOqd8iIGmebQkJ1A.jpeg` | Light blue outfit beneath a tree |
+
+`manifest.json` records the filenames, image dimensions, orientation metadata, file sizes, SHA-256 checksums, and descriptive alt text. Captions are intentionally unset until supplied. Dimensions are stored-image dimensions; preserve orientation correctly when processing images. Use these originals as Astro image inputs when implementation begins. The reference prototype still uses generated stand-ins and has not been changed to use these photos yet.
 
 ## Recommended stack
 
@@ -76,7 +93,7 @@ A login system, database, CMS, dashboard, contact-form service, work portfolio, 
 
 ## Proposed application structure
 
-Scaffold at the repository root when implementation is authorized. The structure below does not exist yet.
+Scaffold at the repository root when implementation is authorized. Only `src/assets/photos/` exists so far; the remaining application structure below is proposed.
 
 ```text
 src/
@@ -110,7 +127,7 @@ Profile data contains the approved name, introduction, About text, and real cont
 
 ## Build sequence
 
-1. **Gather content:** start with 3 good original photos, a short introduction, 1 About paragraph, and verified links. Collect 6–12 photos if a larger viewer collection is wanted. Confirm whether the site will be public.
+1. **Gather content:** seven original photos are ready in `src/assets/photos/`. Choose the opening three and supply captions, a short introduction, 1 About paragraph, and verified links. Confirm whether the site will be public.
 2. **Environment:** select Node 24 LTS, open VS Code, enable the recommended extensions, and confirm who maintains the content and which hosting account to use.
 3. **Scaffold:** create the Astro application at the root, use strict TypeScript, set up formatting and ignore generated output, and commit the dependency lockfile. Preserve the existing design files and installed skill.
 4. **Static design:** implement the composition, typography, images, and mobile flow with no motion first. Match the selected reference.
