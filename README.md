@@ -25,7 +25,7 @@ Read `AGENTS.md` and `DESIGN.md`, then open `design-reference/approved-prototype
 - `THIRD_PARTY_NOTICES.md`: installed skill's license and asset provenance notes.
 - `src/assets/photos/`: seven user-supplied original JPEG photographs, with descriptive filenames and a `manifest.json` index.
 
-The Astro foundation is implemented at the repository root with static output, strict TypeScript, shared CSS tokens, and Prettier with Astro support. The index page contains only Mai’s name. Homepage composition, fonts, image processing, and photo interactions are future steps. The approved design reference remains in `design-reference/`; `DESIGN.md` records the visual specification written before scaffolding.
+The Astro foundation is implemented at the repository root with static output, strict TypeScript, shared CSS tokens, and Prettier with Astro support. The static homepage renders the header, introduction, three-photo composition, About section, and footer using the local content layer. DM Serif Display and DM Sans are self-hosted, and Astro builds responsive WebP thumbnails. Photos have static resting rotations and native links to their full-size JPEGs. Motion and the gallery overlay remain future steps. The approved design reference remains in `design-reference/`; `DESIGN.md` records the visual specification written before scaffolding.
 
 ## Supplied photographs
 
@@ -45,9 +45,9 @@ All seven attachments are saved under `src/assets/photos/`. The copies preserve 
 
 ## Editing personal content
 
-Edit `src/data/profile.ts` for Mai’s name, draft introduction, About text, and verified links. The current copy uses only her supplied interests: fashion, travel, and photography. LinkedIn is the only supplied destination; add other links only when their real URLs are provided. The content layer is prepared for future components; this step leaves the minimal index page unchanged.
+Edit `src/data/profile.ts` for Mai’s name, draft introduction, About text, and verified links. The current copy uses only her supplied interests: fashion, travel, and photography. LinkedIn is the only supplied destination; add other links only when their real URLs are provided. The homepage components read these fields directly.
 
-Edit `src/data/photos.ts` for each photo’s descriptive `alt`, optional `caption`, provisional `crop`, and `restingRotation` (degrees). All captions are `null`; replace one with a supplied caption when available. Alt text describes the visible image and is separate from a personal caption. Shared content shapes live in `src/data/types.ts`.
+Edit `src/data/photos.ts` for each photo’s descriptive `alt`, optional `caption`, provisional `crop`, and `restingRotation` (degrees). All captions are `null`; replace one with a supplied caption when available. Alt text describes the visible image and is separate from a personal caption. Shared content shapes live in `src/data/types.ts`. No caption is currently rendered, so Caveat is not downloaded or loaded; add its licensed local font when actual caption content is supplied. The handwriting token already includes local fallbacks.
 
 - `openingOrder` controls the opening selection and its left-to-right/reading order. It provisionally lists garden portrait, seaside camera, then blue outfit. Reorder or replace IDs to change the selection.
 - `galleryOrder` controls the expanded gallery order independently. Keep each of the seven photo IDs exactly once to retain the complete gallery.
@@ -109,7 +109,7 @@ A login system, database, CMS, dashboard, contact-form service, work portfolio, 
 
 ## Application structure
 
-The current foundation contains `src/pages/index.astro`, `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, the content files in `src/data/`, and the original `src/assets/photos/`. The remaining structure below is proposed for subsequent steps.
+The current foundation contains `src/pages/index.astro`, `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, the content files in `src/data/`, and the original `src/assets/photos/`. Major section components and `src/styles/global.css` are also implemented. Interactions, the viewer, favicon, and browser-test files below remain proposed for subsequent steps.
 
 ```text
 src/
@@ -119,7 +119,7 @@ src/
     Header.astro
     Introduction.astro
     PhotoComposition.astro
-    TiltPhoto.astro
+    PhotoFrame.astro
     About.astro
     Footer.astro
   interactions/
@@ -146,7 +146,7 @@ Profile data contains the approved name, introduction, About text, and real cont
 1. **Gather content:** seven original photos are ready in `src/assets/photos/`. The provisional opening selection and draft introduction/About text live in `src/data/`; LinkedIn is supplied. Review the selection and draft copy, and supply any personal captions or additional verified links. Confirm whether the site will be public.
 2. **Environment (complete):** Node 24 is selected by `.nvmrc`; content is maintained in local files through Git. Hosting remains deferred.
 3. **Scaffold (complete):** root Astro application, strict TypeScript, formatting, generated-output ignores, shared tokens, minimal page/layout, and committed dependency lockfile. Existing design files, original photos, installed skill, and Git history are preserved.
-4. **Static design:** implement the composition, typography, images, and mobile flow with no motion first. Match the selected reference.
+4. **Static design (ready for review):** reusable section components, local licensed fonts, responsive Astro images, mobile photo reflow, static rotations, visible focus, and native full-size image links. See `docs/static-review.md` for checks and Taste exceptions.
 5. **Interactions:** implement reusable tilt with stable hit areas and idle cleanup; integrate the production photo viewer and reduced-motion behavior.
 6. **Finish:** add real content, favicon, page metadata, and a social sharing image. Review copy and visual balance.
 7. **Validate:** build and check types; test keyboard, touch, reduced motion, long captions, image loading, and layouts at 320/390/768/1024/1440px. Inspect Safari and a real phone when available.
@@ -177,7 +177,7 @@ Use `npx prettier --write <file>` to format an edited file. Formatting excludes 
 
 In a restricted shell that cannot write Astro’s user preferences directory, set `ASTRO_TELEMETRY_DISABLED=1` before running Astro commands. Foundation checks were run with this environment variable.
 
-The check, build, and formatting commands are the foundation checks. Browser layout, keyboard, touch, reduced-motion, and Safari verification belong to the design and interaction steps. Taste’s visual finish gate is deferred until there is an implemented design to review. No `test:e2e` script or browser-test dependency is installed yet.
+The check, build, and formatting commands validate the implementation. The static design was reviewed using Taste’s headless Chrome screenshots and responsive layout checker; results and limits are in `docs/static-review.md`. The commercial-page finish gate is not a compatible acceptance gate for this personal, content-sized page. No `test:e2e` script or browser-test dependency is installed yet.
 
 No hosting, deployment, CMS, database, authentication, or backend is configured.
 

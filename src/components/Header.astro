@@ -1,0 +1,64 @@
+---
+import type { ProfileLink } from '../data/types';
+interface Props {
+  name: string;
+  links: readonly ProfileLink[];
+}
+const { name, links } = Astro.props;
+---
+
+<header class="site-header container">
+  <a class="wordmark" href="#home" aria-label={`${name}, home`}>
+    mai.
+  </a>
+  <nav aria-label="Main navigation">
+    <a href="#about">About</a>
+    {links.map((link) => (
+      <a href={link.href}>
+        {link.label} <span aria-hidden="true">↗</span>
+      </a>
+    ))}
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-24);
+    padding-block: var(--space-24);
+  }
+  .wordmark {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    line-height: 1;
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-24);
+    font-size: 14px;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 44px;
+  }
+  nav a {
+    text-decoration: none;
+  }
+  nav a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+  }
+  @media (max-width: 599px) {
+    nav {
+      gap: var(--space-16);
+    }
+  }
+</style>

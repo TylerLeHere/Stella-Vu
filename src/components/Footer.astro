@@ -1,0 +1,50 @@
+---
+import type { ProfileLink } from '../data/types';
+interface Props {
+  name: string;
+  links: readonly ProfileLink[];
+}
+const { name, links } = Astro.props;
+---
+
+<footer class="container">
+  <div class="footer-content">
+    <span>{name}</span>
+    <nav aria-label="Contact and social links">
+      {links.map((link) => (
+        <a href={link.href}>
+          {link.label} <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-16);
+    border-top: 1px solid var(--color-rule);
+    padding-block: var(--space-16) var(--space-24);
+    font-size: 14px;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-16);
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 44px;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+
+<section class="about container" id="about" aria-labelledby="about-heading">
+  <h2 id="about-heading">A little about me</h2>
+  <p>{text}</p>
+</section>
+
+<style>
+  .about {
+    padding-block: 0 var(--space-64);
+    text-align: center;
+    scroll-margin-top: var(--space-32);
+  }
+  h2 {
+    margin: 0 0 var(--space-16);
+    font: 400 28px/1.2 var(--font-heading);
+  }
+  p {
+    max-width: 29rem;
+    margin: 0 auto;
+    text-wrap: pretty;
+  }
+  @media (max-width: 599px) {
+    h2 {
+      font-size: 26px;
+    }
+    .about {
+      padding-bottom: var(--space-48);
+    }
+  }
+</style>

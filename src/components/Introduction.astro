@@ -1,0 +1,55 @@
+---
+interface Props {
+  name: string;
+  introduction: string;
+}
+const { name, introduction } = Astro.props;
+---
+
+<section class="introduction container" aria-labelledby="intro-heading">
+  <p class="eyebrow">A small corner of my world</p>
+  <h1 id="intro-heading">{name}</h1>
+  <p class="supporting-text">{introduction}</p>
+</section>
+
+<style>
+  .introduction {
+    padding-block: var(--space-32) var(--space-16);
+    text-align: center;
+  }
+  .eyebrow {
+    margin: 0 0 var(--space-16);
+    color: var(--color-ink);
+    font-size: 14px;
+  }
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: var(--space-24);
+    height: 1px;
+    margin: 0 auto var(--space-16);
+    background: var(--color-accent);
+  }
+  h1 {
+    margin: 0;
+    font: 400 72px/1.1 var(--font-heading);
+    text-wrap: balance;
+  }
+  .supporting-text {
+    max-width: 36rem;
+    margin: var(--space-24) auto 0;
+    text-wrap: pretty;
+  }
+  @media (max-width: 599px) {
+    .introduction {
+      padding-top: var(--space-24);
+    }
+    h1 {
+      font-size: 48px;
+    }
+    .supporting-text {
+      max-width: 19rem;
+      margin-top: var(--space-16);
+    }
+  }
+</style>

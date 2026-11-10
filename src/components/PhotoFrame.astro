@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import type { Photo } from '../data/types';
+interface Props {
+  photo: Photo;
+  priority?: boolean;
+}
+const { photo, priority = false } = Astro.props;
+---
+
+<figure
+  class="photo-frame"
+  style={`--resting-rotation: ${photo.restingRotation}deg`}
+>
+  <a
+    class="photo-link"
+    href={photo.image.src}
+    aria-label={`Open full-size photograph: ${photo.alt}`}
+  >
+    <Image
+      src={photo.image}
+      alt={photo.alt}
+      width={960}
+      widths={[320, 480, 640, 960]}
+      sizes="(max-width: 599px) calc(min(100vw - 88px, 288px) - 16px), (max-width: 1023px) 26vw, 280px"
+      format="webp"
+      quality={85}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      style={`object-fit: ${photo.crop.fit}; object-position: ${photo.crop.position};`}
+    />
+  </a>
+  {photo.caption && <figcaption>{photo.caption}</figcaption>}
+</figure>
+
+<style>
+  .photo-frame {
+    position: relative;
+    margin: 0;
+    padding: var(--space-8);
+    background: var(--color-photo-paper);
+    border-radius: var(--photo-radius);
+    transform: rotate(var(--resting-rotation));
+    box-shadow:
+      0 12px 24px rgb(57 70 62 / 12%),
+      0 2px 4px rgb(57 70 62 / 6%);
+  }
+  .photo-frame:focus-within {
+    z-index: 1;
+  }
+  .photo-link {
+    display: block;
+    border-radius: 1px;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    border-radius: 1px;
+  }
+  figcaption {
+    padding: var(--space-8) var(--space-4) var(--space-4);
+    font: 400 22px/1.3 var(--font-caption);
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 599px) {
+    figcaption {
+      font-size: 20px;
+    }
+  }
+</style>

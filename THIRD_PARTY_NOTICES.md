@@ -25,3 +25,19 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Website fonts
+
+DM Serif Display and DM Sans are redistributed under the SIL Open Font License 1.1. The complete upstream copyright and license notices are in `public/fonts/DM-Serif-Display-OFL.txt` and `public/fonts/DM-Sans-OFL.txt`. Only the Latin, normal, weight 400 WOFF2 files are included for the current content. The website uses local font URLs and makes no runtime requests to a font service.
+
+Downloaded through Fontsource’s jsDelivr distribution:
+
+- https://cdn.jsdelivr.net/fontsource/fonts/dm-serif-display@latest/latin-400-normal.woff2
+- https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@latest/latin-400-normal.woff2
+
+License sources:
+
+- https://github.com/google/fonts/blob/main/ofl/dmserifdisplay/OFL.txt
+- https://github.com/google/fonts/blob/main/ofl/dmsans/OFL.txt
+
+The committed font binaries are the local source of truth; builds do not fetch `latest`. Add the appropriate licensed language subsets if future approved copy requires characters outside this subset.

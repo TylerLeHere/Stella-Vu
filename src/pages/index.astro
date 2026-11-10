@@ -1,15 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Introduction from '../components/Introduction.astro';
+import PhotoComposition from '../components/PhotoComposition.astro';
+import About from '../components/About.astro';
+import Footer from '../components/Footer.astro';
+import { profile } from '../data/profile';
+import { openingPhotos } from '../data/photos';
 ---
 
-<BaseLayout title="Quynh Mai Vu" description="Quynh Mai Vu’s personal website.">
-  <main>
-    <h1>Quynh Mai Vu</h1>
+<BaseLayout title={profile.name} description={profile.introduction}>
+  <div id="home">
+    <Header name={profile.name} links={profile.links} />
+  </div>
+  <main id="main" tabindex="-1">
+    <Introduction name={profile.name} introduction={profile.introduction} />
+    <PhotoComposition photos={openingPhotos} />
+    <About text={profile.about} />
   </main>
+  <Footer name={profile.name} links={profile.links} />
 </BaseLayout>
-
-<style>
-  main {
-    padding: var(--space-24);
-  }
-</style>

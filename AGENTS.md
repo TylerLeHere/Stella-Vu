@@ -2,7 +2,7 @@
 
 ## Current stage
 
-Implementation has begun. The local Astro foundation and its required dependencies are authorized. This step includes static output, strict TypeScript, npm with one committed lockfile, formatting, shared design tokens, and a minimal page and layout. Homepage design and photo interactions await the next step. Do not publish or configure hosting without a later user instruction.
+The Astro foundation, personal content layer, and static homepage are implemented. The homepage is ready for visual review, with resting photo rotations and native links to full-size images. Pointer tilt, tracking reflection, entrance animations, and the gallery overlay await a later step. Do not publish or configure hosting without a later user instruction.
 
 ## Project instructions
 
